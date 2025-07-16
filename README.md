@@ -7,25 +7,15 @@ Surprisingly complex and beautiful patterns emerge from these simple interaction
 
 ## ✨ Learn More
 
-📺 **Watch the Video Explanation**  
-*(Coming soon)*  
-[YouTube Video](https://youtu.be/) ⛔ Not yet available
+📺 **Watch Demo**
+[YouTube Video](https://youtube.com/shorts/3GipVyjxBpg)
 
 ---
 
 ## 🩵 Live Demo
 
-💻 **Try it Online**  
-*(Coming soon)*  
-[Live Demo on aori.com](https://aori.com/particles-life) ⛔ Not yet available
-
----
-
-## 🐍 Code Explanation
-
-📘 **In-depth Code Walkthrough**  
-*(Coming soon)*  
-More technical documentation will be added here once ready.
+💻 **Try it Online**
+[Live Demo on aori-san.com](https://aori-san.com)
 
 ---
 
@@ -34,9 +24,3 @@ More technical documentation will be added here once ready.
 - Particle-based simulation using simple physical rules
 - Emergent behavior and self-organizing patterns
 - Easy to modify and extend with your own rules
-
----
-
-## 🚧 Status
-
-This project is a **work in progress**. Stay tuned for updates including the full video explanation, live demo, and code walkthrough.
