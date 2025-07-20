@@ -1,5 +1,5 @@
 import {Particle} from "./particle.model.ts";
-import {NB_COLORS, NB_PARTICLES, PARTICLE_SIZE, VELOCITY} from "../config/config.ts";
+import {LIMIT_OFFSET, NB_COLORS, NB_PARTICLES, PARTICLE_SIZE, VELOCITY} from "../config/config.ts";
 import {MassService} from "../mass/mass.service.ts";
 import {PositionService} from "../postion/position.service.ts";
 import {Panel} from "../../panel/panel.ts";
@@ -46,20 +46,19 @@ export class ParticleService {
 
             const width: number = this._ctx.canvas.width;
             const height: number = this._ctx.canvas.height;
-            const limit: number = 500;
 
             for (const otherParticle of this._particles) {
                 if (particle === otherParticle) continue;
 
-                if (particle.x > width - limit && otherParticle.x < limit) {
+                if (particle.x > width - LIMIT_OFFSET && otherParticle.x < LIMIT_OFFSET) {
                     otherParticle.x += width;
-                } else if (particle.x < limit && otherParticle.x > width - limit) {
+                } else if (particle.x < LIMIT_OFFSET && otherParticle.x > width - LIMIT_OFFSET) {
                     otherParticle.x -= width;
                 }
 
-                if (particle.y > height - limit && otherParticle.y < limit) {
+                if (particle.y > height - LIMIT_OFFSET && otherParticle.y < LIMIT_OFFSET) {
                     otherParticle.y += height;
-                } else if (particle.y < limit && otherParticle.y > height - limit) {
+                } else if (particle.y < LIMIT_OFFSET && otherParticle.y > height - LIMIT_OFFSET) {
                     otherParticle.y -= height;
                 }
 
@@ -67,7 +66,7 @@ export class ParticleService {
                 const distanceY: number = otherParticle.y - particle.y;
                 const distance: number = Math.sqrt(distanceX ** 2 + distanceY ** 2);
 
-                if (distance < limit) {
+                if (distance < LIMIT_OFFSET) {
                     const g: number = this.getGravitationalForce(particle, otherParticle);
                     const m1: number = otherParticle.mass;
                     const m2: number = particle.mass;
