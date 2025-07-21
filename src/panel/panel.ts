@@ -128,7 +128,12 @@ export class Panel {
         if (!velocityInput) throw new Error("Element not found");
         if (!limitOffsetInput) throw new Error("Element not found");
 
-        eraseCheckbox.checked = true;
+        eraseCheckbox.checked = ERASE;
+        blurCheckbox.checked = DISPLAY_BLUR;
+        particlesNumberInput.value = NB_PARTICLES.toString();
+        velocityInput.value = VELOCITY.toString();
+        limitOffsetInput.value = LIMIT_OFFSET.toString();
+
 
         chevronButton.addEventListener('click', (): void => {
             panel.classList.toggle('hide');
