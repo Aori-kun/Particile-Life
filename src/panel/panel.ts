@@ -9,6 +9,8 @@ export class Panel {
     public static displayBlur: boolean = false;
     public static erase: boolean = true;
     public static particleService: ParticleService | undefined = undefined;
+    public static nbParticles: number = 100;
+    public static velocity: number = 0.9;
 
     constructor() {
         this.init();
@@ -110,6 +112,8 @@ export class Panel {
         const chevronButton: Element | null = document.querySelector(".settings__panel__header .chevron");
         const blurCheckbox: HTMLInputElement | null = document.querySelector(".blur__input");
         const eraseCheckbox: HTMLInputElement | null = document.querySelector(".erase__input");
+        const particlesNumberInput: HTMLInputElement | null = document.querySelector(".particles__number__input");
+        const velocityInput: HTMLInputElement | null = document.querySelector(".velocity__input");
         const weightInput: HTMLCollectionOf<Element> | null = document.getElementsByClassName("weight__input");
 
         if (!panel) throw new Error("Element not found");
@@ -118,6 +122,8 @@ export class Panel {
         if (!eraseCheckbox) throw new Error("Element not found")
         if (!reloadButton) throw new Error("Element not found");
         if (!chevronButton) throw new Error("Element not found");
+        if (!particlesNumberInput) throw new Error("Element not found");
+        if (!velocityInput) throw new Error("Element not found");
 
         eraseCheckbox.checked = true;
 
@@ -138,6 +144,14 @@ export class Panel {
         reloadButton.addEventListener('click', (): void => {
             if (Panel.particleService) Panel.particleService.initParticles();
         });
+        particlesNumberInput.addEventListener('input', (): void => {
+            Panel.nbParticles = Number(particlesNumberInput.value);
+            if (Panel.particleService) Panel.particleService.start();
+        })
+        velocityInput.addEventListener('input', (): void => {
+            Panel.velocity = Number(velocityInput.value);
+            if (Panel.particleService) Panel.particleService.start();
+        })
 
         for (const input of weightInput) input.addEventListener('click', (event: Event): void => {
             const el: HTMLTableCellElement = event.currentTarget as HTMLTableCellElement;

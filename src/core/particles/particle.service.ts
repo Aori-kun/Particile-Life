@@ -1,5 +1,5 @@
 import {Particle} from "./particle.model.ts";
-import {LIMIT_OFFSET, NB_COLORS, NB_PARTICLES, PARTICLE_SIZE, VELOCITY} from "../config/config.ts";
+import {LIMIT_OFFSET, NB_COLORS, PARTICLE_SIZE} from "../config/config.ts";
 import {MassService} from "../mass/mass.service.ts";
 import {PositionService} from "../postion/position.service.ts";
 import {Panel} from "../../panel/panel.ts";
@@ -22,7 +22,7 @@ export class ParticleService {
     public initParticles(): void {
         const particles: Particle[] = [];
 
-        const nbParticlesPerColor: number = NB_PARTICLES / NB_COLORS;
+        const nbParticlesPerColor: number = Panel.nbParticles / NB_COLORS;
 
         for (const color of Panel.colors) {
             const mass: number = MassService.generateMass();
@@ -87,9 +87,8 @@ export class ParticleService {
             particle.vx += forceX;
             particle.vy += forceY;
 
-
-            particle.vx *= VELOCITY;
-            particle.vy *= VELOCITY;
+            particle.vx *= Panel.velocity;
+            particle.vy *= Panel.velocity;
         }
 
         for (const particle of this._particles) {
