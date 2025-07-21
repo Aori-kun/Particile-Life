@@ -1,5 +1,5 @@
 import {Particle} from "./particle.model.ts";
-import {LIMIT_OFFSET, NB_COLORS, PARTICLE_SIZE} from "../config/config.ts";
+import {NB_COLORS, PARTICLE_SIZE} from "../config/config.ts";
 import {MassService} from "../mass/mass.service.ts";
 import {PositionService} from "../postion/position.service.ts";
 import {Panel} from "../../panel/panel.ts";
@@ -50,15 +50,15 @@ export class ParticleService {
             for (const otherParticle of this._particles) {
                 if (particle === otherParticle) continue;
 
-                if (particle.x > width - LIMIT_OFFSET && otherParticle.x < LIMIT_OFFSET) {
+                if (particle.x > width - Panel.limitOffset && otherParticle.x < Panel.limitOffset) {
                     otherParticle.x += width;
-                } else if (particle.x < LIMIT_OFFSET && otherParticle.x > width - LIMIT_OFFSET) {
+                } else if (particle.x < Panel.limitOffset && otherParticle.x > width - Panel.limitOffset) {
                     otherParticle.x -= width;
                 }
 
-                if (particle.y > height - LIMIT_OFFSET && otherParticle.y < LIMIT_OFFSET) {
+                if (particle.y > height - Panel.limitOffset && otherParticle.y < Panel.limitOffset) {
                     otherParticle.y += height;
-                } else if (particle.y < LIMIT_OFFSET && otherParticle.y > height - LIMIT_OFFSET) {
+                } else if (particle.y < Panel.limitOffset && otherParticle.y > height - Panel.limitOffset) {
                     otherParticle.y -= height;
                 }
 
@@ -66,7 +66,7 @@ export class ParticleService {
                 const distanceY: number = otherParticle.y - particle.y;
                 const distance: number = Math.sqrt(distanceX ** 2 + distanceY ** 2);
 
-                if (distance < LIMIT_OFFSET) {
+                if (distance < Panel.limitOffset) {
                     const g: number = this.getGravitationalForce(particle, otherParticle);
                     const m1: number = otherParticle.mass;
                     const m2: number = particle.mass;

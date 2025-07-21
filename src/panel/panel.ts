@@ -1,16 +1,17 @@
 import {WeightService} from "../core/weight/weight.service.ts";
-import {NB_COLORS} from "../core/config/config.ts";
+import {NB_COLORS, LIMIT_OFFSET, NB_PARTICLES, VELOCITY, DISPLAY_BLUR, ERASE} from "../core/config/config.ts";
 import {ColorService} from "../core/colors/color.service.ts";
 import {ParticleService} from "../core/particles/particle.service.ts";
 
 export class Panel {
     public static colors: string[] = [];
     public static forces: number[][];
-    public static displayBlur: boolean = false;
-    public static erase: boolean = true;
+    public static displayBlur: boolean = DISPLAY_BLUR;
+    public static erase: boolean = ERASE;
     public static particleService: ParticleService | undefined = undefined;
-    public static nbParticles: number = 100;
-    public static velocity: number = 0.9;
+    public static nbParticles: number = NB_PARTICLES;
+    public static velocity: number = VELOCITY;
+    public static limitOffset: number = LIMIT_OFFSET;
 
     constructor() {
         this.init();
@@ -114,6 +115,7 @@ export class Panel {
         const eraseCheckbox: HTMLInputElement | null = document.querySelector(".erase__input");
         const particlesNumberInput: HTMLInputElement | null = document.querySelector(".particles__number__input");
         const velocityInput: HTMLInputElement | null = document.querySelector(".velocity__input");
+        const limitOffsetInput: HTMLInputElement | null = document.querySelector(".limit__offset__input");
         const weightInput: HTMLCollectionOf<Element> | null = document.getElementsByClassName("weight__input");
 
         if (!panel) throw new Error("Element not found");
@@ -124,6 +126,7 @@ export class Panel {
         if (!chevronButton) throw new Error("Element not found");
         if (!particlesNumberInput) throw new Error("Element not found");
         if (!velocityInput) throw new Error("Element not found");
+        if (!limitOffsetInput) throw new Error("Element not found");
 
         eraseCheckbox.checked = true;
 
@@ -150,6 +153,10 @@ export class Panel {
         })
         velocityInput.addEventListener('input', (): void => {
             Panel.velocity = Number(velocityInput.value);
+            if (Panel.particleService) Panel.particleService.start();
+        })
+        limitOffsetInput.addEventListener('input', (): void => {
+            Panel.limitOffset = Number(limitOffsetInput.value);
             if (Panel.particleService) Panel.particleService.start();
         })
 
