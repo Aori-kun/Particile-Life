@@ -5,5 +5,5 @@ aori-san.com {
 }
 
 www.aori-san.com {
-    redir https://aori-san.com/particle-life permanent
+    redir https://aori-san.com permanent
 }
